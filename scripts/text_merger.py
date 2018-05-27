@@ -10,6 +10,7 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('input')
     parser.add_argument('output')
+    parser.add_argument('--depfile')
     parser.add_argument('--show_includes', action='store_true')
     args = parser.parse_args()
 
@@ -23,6 +24,9 @@ if __name__=='__main__':
     # 正規表現
     prog = re.compile(r'inlcude((\S+))')
 
+    # 依存ファイル
+    depfiles = list()
+
     # コンバート
     with codecs.open(args.output,'w', 'utf-8') as f:
         for line in lines:
@@ -33,11 +37,20 @@ if __name__=='__main__':
                 with codecs.open(infile, 'r', 'utf-8') as f_in:
                     f.write(f_in.read())
                     f.write('\r\n')
+                # gccスタイルの依存ファイル用
+                depfiles.append(infile)
                 # MSVCスタイルで依存ファイルを標準出力に出す 
                 if args.show_includes:
                     sys.stdout.write('Note: including file: tmp\\include\\{}\r\n'.format(filename))
             else:
                 f.write(line) 
+
+    if args.depfile:
+        with open(args.depfile, 'w') as f:
+            f.write('{} : \\\r\n'.format(args.output))
+            f.write('  {}\\\r\n'.format(args.input))
+            for depfile in depfiles:
+                f.write('  {}\\\r\n'.format(depfile))
 
 
 

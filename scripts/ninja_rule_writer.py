@@ -34,8 +34,9 @@ if __name__=='__main__':
 
         writer.rule(
             name='text_merger',
-            command='python $text_merger $in $out --show_includes',
-            deps='msvc',
+            command='python $text_merger $in $out --depfile $out.d',
+            deps='gcc',
+            depfile='$out.d',
             description='includeを展開するコンバート'
         )
         writer.newline()

@@ -23,7 +23,7 @@ def text_merger(writer, infile, outfile):
         outputs=[outfile],
         rule='text_merger',
         inputs=[infile],
-        implicit=['$text_merger','$setting_file']
+        implicit=['$text_merger']
     )
     writer.newline()
 
