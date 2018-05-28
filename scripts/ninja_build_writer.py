@@ -18,7 +18,7 @@ def text_converter(writer, infile, outfile):
     writer.newline()
 
 def text_merger(writer, infile, outfile):
-    """ text_converterを呼び出すラッパー """
+    """ text_mergerを呼び出すラッパー """
     writer.build(
         outputs=[outfile],
         rule='text_merger',

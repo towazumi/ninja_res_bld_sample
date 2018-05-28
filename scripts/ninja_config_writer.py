@@ -37,6 +37,3 @@ if __name__=='__main__':
         writer.comment('設定ファイル')
         writer.variable(key='setting_file',value=os.path.join(root_dir, 'data', 'setting.json'))
         
-        writer.comment('暗黙の依存関係解決(VisualStudioスタイル)')
-        writer.variable(key='msvc_deps_prefix',value='Note: including file:')
-        writer.newline()
