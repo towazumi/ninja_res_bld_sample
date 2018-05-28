@@ -7,6 +7,7 @@ ninjaを使用してリソースビルド(データコンバート)するサン�
 submoduleに指定しているので
 
 ```batch
+git submodule init
 git submodule update
 ```
 
